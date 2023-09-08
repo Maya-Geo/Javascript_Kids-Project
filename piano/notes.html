@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title>Create Your Own Song</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <audio id="key1" src="key1.mp3" preload loop></audio>
+    <audio id="key2" src="key2.mp3" preload loop></audio>
+
+    <div class="container">
+      <h1>Piano</h1>
+
+      <span>Music:</span>
+      <button id="key1Btn">1</button>
+      <button id="key2Btn">2</button>
+      <span class="sound-control">Volume: </span>
+      <input id="soundInput" type="range" min=1 max=10 value=10>
+      <div class="piano"></div>
+    </div>
+
+    
+    <script>
+
+     var keysMap = {
+       'a': 'note_a',
+       'b': 'note_b',
+       'c': 'note_c',
+       'd': 'note_d',
+       'e': 'note_e',
+       'f': 'note_f',
+       'g': 'note_g'
+     }
+     var currentVolume = 1;
+
+     var validKeys = Object.keys(keysMap);
+
+     for (key of validKeys) {
+       var pad = keysMap[key];
+       console.log(key);
+       console.log(pad);
+       var padHtml = `
+        <div class="pad" id="${pad}-box">
+          <p class="pad-label">${key}</p>
+        </div>`;
+        $('.piano').append(padHtml);
+
+        $('body').append(`<audio id="${pad}" src="${pad}.mp3" preload>`);
+     }
+
+     function play(e){
+       var clickedKey = e.key;
+       var isValid = validKeys.includes(clickedKey);
+       if (isValid){
+          var drumId = '#' + keysMap[clickedKey];
+
+          $(drumId)[0].pause();
+          $(drumId)[0].currentTime = 0;
+          $(drumId)[0].volume = currentVolume;
+          $(drumId)[0].play();
+
+          $(`${drumId}-box`).addClass('active');
+       } else if (clickedKey == '1') {
+         $('#key2')[0].pause();
+         $('#key1')[0].play();
+       } else if (clickedKey == '2') {
+         $('#key1')[0].pause();
+         $('#key2')[0].play();
+       }
+     }
+
+     $('body').keydown(play);
+
+     function reset(e) {
+       $('.active').removeClass('active');
+     }
+
+     $('body').keyup(reset);
+
+     function setSound() {
+       var vol = $('#soundInput').val();
+       currentVolume = vol/10;
+     }
+     $('#soundInput').change(setSound);
+
+      
+      
+    
+    </script>
+    
+  </body>
+</html>

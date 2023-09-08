@@ -1,0 +1,75 @@
+*{
+  transition: 0.2s all ease;
+}
+
+body {
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 40px;
+  background-position: left;
+  background-color: #ff3842;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1{ 
+  font-family: 'Bungee Shade', cursive;
+  font-weight: normal;
+  text-align: center;
+  font-size: 32px;
+}
+
+.container {
+  max-width: 400px;
+  margin-left: auto;
+  margin-top: 40px;
+  box-shadow: 2px 2px 10px 1px #333;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.piano{
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.pad {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  background-color: #34495e;
+  border-radius: 15px;
+  box-shadow: 2px 2px 3px 1px #333;
+}
+
+.active {
+  box-shadow: inset 0px 0px 15px 2px #333;
+}
+
+.pad-label {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 24px;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+.active > .pad-label {
+  font-size: 22px;
+}
+
+button {
+  background: transparent;
+  border: 1px solid black;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.sound-control {
+  margin-left: 100px;
+}
